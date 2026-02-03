@@ -1,6 +1,13 @@
 server:
   port: 9010
 
+security:
+ jwt:
+  key-store: classpath:jwt-signing.jks
+  key-store-password: ${JWT_KEYSTORE_PASSWORD}
+  key-pair-alias: ${JWT_KEYPAIR_ALIAS}
+  key-pair-password: ${JWT_KEYPAIR_PASSWORD}
+
 #database:
 #  host: 'user-management-db.fg8eiu4gko4z.us-east-1.rds.amazonaws.com'
 #  port: 5432
