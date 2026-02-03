@@ -1,0 +1,28 @@
+server:
+  port: 9010
+
+#database:
+#  host: 'user-management-db.fg8eiu4gko4z.us-east-1.rds.amazonaws.com'
+#  port: 5432
+#  db-name: user_management_db
+#
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://${database.host}:${database.port}/${database.db-name}?sslmode=require
+#    username: postgres
+#    password: ${DB_PASSWORD}
+#    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      maximum-pool-size: 30
+#      minimum-idle: 6
+#      connection-timeout: 30000
+#      idle-timeout: 600000
+#      connection-test-query: SELECT 1
+#  sql:
+#    init:
+#      mode: always
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: none
