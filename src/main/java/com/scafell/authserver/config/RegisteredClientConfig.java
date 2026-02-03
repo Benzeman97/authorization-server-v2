@@ -25,9 +25,11 @@ public class RegisteredClientConfig {
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .redirectUri("http://localhost:8080/login/oauth2/code/demo-client")
+                .redirectUri("http://localhost:9010/login/oauth2/code/google")
                 .scope(OidcScopes.OPENID)
                 .scope("read")
+                .scope("profile")
+                .scope("email")
                 .scope("write")
                 .build();
 
