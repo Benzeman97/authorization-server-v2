@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.scafell'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 description = 'Spring Boot–based Authorization Server implementing OAuth 2 and OpenID Connect with JWT, PKCE, and secure token flows.'
 
 java {
@@ -24,11 +24,16 @@ repositories {
 	mavenCentral()
 }
 
+configurations.all {
+	exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compileOnly 'org.projectlombok:lombok'
 //	runtimeOnly 'org.postgresql:postgresql'
@@ -40,6 +45,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+bootJar {
+	archiveBaseName.set('authorization-server')
+	archiveVersion.set(project.version)
 }
 
 tasks.named('test') {
