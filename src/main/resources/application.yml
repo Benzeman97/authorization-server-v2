@@ -1,5 +1,5 @@
 spring:
  application:
-  name: Authorization Server
+  name: authorization-server-v2
  profiles:
   active: dev
