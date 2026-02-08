@@ -1,35 +1,32 @@
+package com.scafell.authserver.security;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.io.Resource;
 
 @ConfigurationProperties(prefix = "security")
-@Validated
 public class SecurityProperties {
 
-   @NotNull(message = "JWT configuration is required")
    private JwtProperties jwt;
 
    public JwtProperties getJwt() {
         return jwt;
     }
-    
+
     public void setJwt(JwtProperties jwt) {
         this.jwt = jwt;
     }
     
    public static class JwtProperties {
 
-        @NotNull(message = "KeyStore location is required")
         private Resource keyStore;
 
-        @NotNull(message = "KeyStore password is required")
         private String keyStorePassword;
 
-        @NotNull(message = "Key pair alias is required")
         private String keyPairAlias;
 
-        @NotNull(message = "Key pair password is required")
         private String keyPairPassword;
 
-     public Resource getKeyStore() {
+        public Resource getKeyStore() {
             return keyStore;
         }
         
