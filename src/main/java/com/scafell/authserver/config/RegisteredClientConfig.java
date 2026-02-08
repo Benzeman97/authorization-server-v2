@@ -167,6 +167,42 @@ public class RegisteredClientConfig {
 
     }
 
+    @Bean
+public RegisteredClientRepository registeredClientRepository(
+        JdbcTemplate jdbcTemplate,
+        PasswordEncoder passwordEncoder) {
+    
+    JdbcRegisteredClientRepository repository = 
+        new JdbcRegisteredClientRepository(jdbcTemplate);
+    
+    // Check if client already exists
+    if (repository.findByClientId("your-client-id") == null) {
+        // Register your client programmatically
+        RegisteredClient client = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("your-client-id")
+                .clientSecret(passwordEncoder.encode("your-client-secret"))
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .redirectUri("http://localhost:8080/authorized")
+                .scope("read")
+                .scope("write")
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(true)
+                        .build())
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenTimeToLive(Duration.ofMinutes(30))
+                        .refreshTokenTimeToLive(Duration.ofDays(1))
+                        .reuseRefreshTokens(false)
+                        .build())
+                .build();
+        
+        repository.save(client);
+    }
+    
+    return repository;
+}
+
    /*
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
